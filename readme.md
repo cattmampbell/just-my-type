@@ -24,13 +24,9 @@
     * *Ask yourself*: How do I determine which key was pressed on the keyboard when using a jQuery event listener?
 * The sentences in the provided array should be displayed at the top of the page one sentence at a time. Once the sentence has been completed, the next in line should appear. There is already a `div` with `id="sentence"` in your `HTML` file. This is where you will display each sentence one at a time.
 
----
-
 ```javascript
 let sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 'Too ato too nOt enot one totA not anot tOO aNot', 'oat itain oat tain nate eate tea anne inant nean', 'itant eate anot eat nato inate eat anot tain eat', 'nee ene ate ite tent tiet ent ine ene ete ene ate'];`
 ```
-
----
 
 * You should highlight the currently expected letter in the on-screen sentence that should be typed next.
   * You can use the div with `id="yellow-block"` and nudge it along a fixed number of pixels if you'd like.
