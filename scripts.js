@@ -1,13 +1,7 @@
 // .ready() event handler method on document
 $(document).ready(() => {
     // Define/assign variables:
-    const sentences = [
-        `ten ate neite ate nee enet ite ate inet ent eate`, 
-        `Too ato too nOt enot one totA not anot tOO aNot`, 
-        `oat itain oat tain nate eate tea anne inant nean`, 
-        `itant eate anot eat nato inate eat anot tain eat`, 
-        `nee ene ate ite tent tiet ent ine ene ete ene ate`
-    ];
+    const sentences = [`ten ate neite ate nee enet ite ate inet ent eate`, `Too ato too nOt enot one totA not anot tOO aNot`, `oat itain oat tain nate eate tea anne inant nean`, `itant eate anot eat nato inate eat anot tain eat`, `nee ene ate ite tent tiet ent ine ene ete ene ate`];
     let sentenceIndex = 0;
     let letterIndex = 0;
    
@@ -42,27 +36,29 @@ $(document).ready(() => {
     })
 
     $(document).on(`keypress`, (event) => { 
-        let keyPress = event.which;
-        // Add background-color: rgba(255, 201, 4, 0.550); via .highlight
-        $(`#${keyPress}`).addClass(`highlight`);
+        // Each time .on(`keypress`, (event)) handler method runs...
+        let keyCode = event.which;
+        // Add background-color: rgba(255, 201, 4, 0.550); via .highlight to keyCode
+        $(`#${keyCode}`).addClass(`highlight`);
 
         if(keyCount < 1) {
-            // Add 1 to keyCount, each time .on(`keypress`, (event)) handler method runs 
+            // Add 1 to keyCount
             keyCount++; 
         }
 
         let currentSentence = sentences[sentenceIndex]; 
         let currentLetter = currentSentence[letterIndex];
 
-        // Add 1 to letterIndex, each time .on(`keypress`, (event)) handler method runs
+        // Add 1 to letterIndex
         letterIndex++; 
+        // Stage nextLetter in currentSentence[letterIndex]
         let nextLetter = currentSentence[letterIndex];
 
-        // Place nextLetter into into #target-letter, each time .on(`keypress`, (event)) handler method runs
-        $('#target-letter').text(nextLetter); 
+        // Place nextLetter in #target-letter
+        $(`#target-letter`).text(nextLetter); 
 
-        // Move #yellow-block 17.5 pixels via .animate(), each time .on(`keypress`, (event)) handler method runs
-        // $('#yellow-block').animate({left: '+=17.5px'}, {duration: 1}, {easing: 'linear'});
+        // Move #yellow-block 17.5 pixels via .animate()
+        $("#yellow-block").animate({ left: "+=17.85px" }, { duration: 100, easing: "linear" });
     })
 
 })
