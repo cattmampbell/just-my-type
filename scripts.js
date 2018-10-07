@@ -8,18 +8,30 @@ $(document).ready(() => {
         `itant eate anot eat nato inate eat anot tain eat`, 
         `nee ene ate ite tent tiet ent ine ene ete ene ate`
     ];
+    let sentenceIndex = 0;
+    let letterIndex = 0;
+   
+    let keyCount = 0;
+    let wordCount = 0;
+    let mistakeCount = 0;
+
+    let timeStart = 0;
+    let timeEnd = 0;
+
+    let currentSentence = sentences[0];
+    let currentLetter = currentSentence[0];
+    $('#target-letter').text(currentLetter); // Places currentLetter into #target-letter
+    $('#sentence').append(sentences[sentenceIndex]); // Appends sentences[sentenceIndex] into #sentences
 
     // Hide uppercase on page load
     $(`#keyboard-upper-container`).hide();
 
-    // .on(`keydown`, (event)) handler method on document
     $(document).on(`keydown`, (event) => { 
         // Show uppercase, hide lowercase
         if(event.which === 16 || event.which === 20) { 
             $(`#keyboard-upper-container, #keyboard-lower-container`).toggle(); 
         }
     })
-    // .on(`keyup`, (event)) handler method on document
     .on(`keyup`, (event) => { 
         // Show lowercase, hide uppercase
         if(event.which === 16 || event.which === 20) { 
@@ -29,10 +41,28 @@ $(document).ready(() => {
         $(`.highlight`).removeClass(`highlight`);
     })
 
-    // .on(`keypress`, (event)) handler method on document
     $(document).on(`keypress`, (event) => { 
-        let keyCode = event.keyCode || event.which;
+        let keyPress = event.which;
         // Add background-color: rgba(255, 201, 4, 0.550); via .highlight
-        $(`#${keyCode}`).addClass(`highlight`);
+        $(`#${keyPress}`).addClass(`highlight`);
+
+        if(keyCount < 1) {
+            // Add 1 to keyCount, each time .on(`keypress`, (event)) handler method runs 
+            keyCount++; 
+        }
+
+        let currentSentence = sentences[sentenceIndex]; 
+        let currentLetter = currentSentence[letterIndex];
+
+        // Add 1 to letterIndex, each time .on(`keypress`, (event)) handler method runs
+        letterIndex++; 
+        let nextLetter = currentSentence[letterIndex];
+
+        // Place nextLetter into into #target-letter, each time .on(`keypress`, (event)) handler method runs
+        $('#target-letter').text(nextLetter); 
+
+        // Move #yellow-block 17.5 pixels via .animate(), each time .on(`keypress`, (event)) handler method runs
+        // $('#yellow-block').animate({left: '+=17.5px'}, {duration: 1}, {easing: 'linear'});
     })
+
 })
