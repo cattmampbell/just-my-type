@@ -40,3 +40,7 @@
 .glyphicon-remove {
   color : #CD2626
 }
+
+.highlight {
+  background-color: rgba(255, 201, 4, 0.550);
+}
