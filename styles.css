@@ -50,3 +50,11 @@
 .highlight {
   background-color: rgba(255, 201, 4, 0.550);
 }
+
+#yesBtn {
+  margin-right: 2rem;
+}
+
+#noBtn {
+  margin-left: 2rem;
+}
