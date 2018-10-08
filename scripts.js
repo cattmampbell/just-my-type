@@ -23,6 +23,7 @@ $(document).ready(() => {
     $('#sentence').append(sentences[sentenceIndex]); // Append sentences[sentenceIndex] into #sentences 
 
     $(`#keyboard-upper-container`).hide(); // Hide uppercase on page load
+    $(`#tryAgain, #yesNoBtns, #yesBtn, #noBtn`).hide(); // Hide #tryAgain, #yesNoBtns, #yesBtn and #noBtn on page load
 
     $(document).on(`keydown`, (event) => { 
         if(event.which === 16 || event.which === 20) { 
@@ -60,7 +61,7 @@ $(document).ready(() => {
             if(letterIndex < currentSentence.length) { // if(not last letter of currentSentence)
                 if(keyCode === currentLetter.charCodeAt()) { // if(keyCode is correct)
                     $(`#feedback`).append(`<span class='glyphicon glyphicon-ok'></span>`); // Append .glyphicon-ok to #feedback
-                } else { 
+                } else if (keyCode !== currentLetter.charCodeAt()) { 
                     $(`#feedback`).append(`<span class='glyphicon glyphicon-remove'></span>`); // Append .glyphicon-remove to #feedback
                     mistakeCount++; // Adds 1 to mistakeCount
                 }
@@ -108,24 +109,19 @@ $(document).ready(() => {
                     .delay(250)
                     .fadeIn(250);
 
-                $(`#sentence`)
-                    .append(`<div class="h3" id="question"><strong>Try again?</strong></div>`)
-                    .append(`<button class="col-12 btn btn-lg btn-dark py-4 px-2 my-4 mx-4" id="yesBtn">Yes</button>`)
-                    .append(`<button class="col-12 btn btn-lg btn-dark py-4 px-2 my-4 mx-4" id="noBtn">No</button>`)
+                $(`#tryAgain, #yesNoBtns, #yesBtn, #noBtn`)
                     .hide()
-                    .delay(750)
-                    .fadeIn(250);
+                    .delay(500)
+                    .fadeIn(1500);
 
                 $(`#yesBtn`).on('click', () => {
                     location.reload(); // Reloads page .on('click')
                 })
 
-                $(`#noBtn`).on('click', () => {
-                    $(`#noBtn, #yesBtn, #question`)
-                        .hide()
-                        .delay(750)
-                        .fadeOut(250)
-                        .remove(); 
+                $(`#noBtn`).on('click', () => { 
+                    $(`#tryAgain, #yesNoBtns, #yesBtn, #noBtn`)
+                        .delay(500)
+                        .fadeOut(1500) 
                 })
             } 
 
