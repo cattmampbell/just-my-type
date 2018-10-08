@@ -88,19 +88,48 @@ $(document).ready(() => {
                 let accuracy = (netSpeed / grossWordsPerMinute) * 100;
 
                 $(`#sentence, #target-letter, #feedback`).empty(); // Empty #sentence, #target-letter, #feedback <div> tags
-                $(`#yellow-block`).hide(); // Hide #yellow-block
+                $(`#yellow-block, #keyboard-upper-container, #keyboard-lower-container, #space-key-container`).hide(); // Hide #yellow-block, #keyboard-upper-container, #keyboard-lower-container and #space-key-container
 
-                $(`#sentence`).addClass(`text-center mt-4`);
-                $(`#sentence`).append(`
-                    <strong>Word Count:</strong> ${wordCount}<br>
-                    <strong>Typed Entries:</strong> ${keyCount}<br> 
-                    <strong>Uncorrected Errors:</strong> ${mistakeCount}<br>
-                    <strong>Seconds:</strong> ${seconds}<br>
-                    <strong>Minutes:</strong> ${minutes}<br>
-                    <strong>Gross WPM:</strong> ${grossWordsPerMinute}<br>
-                    <strong>Net Speed:</strong> ${netSpeed}<br>
-                    <strong>Accuracy:</strong> ${accuracy}%!`);
+                let scores = `
+                    <strong>Word Count:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${wordCount}</span><br>
+                    <strong>Typed Entries:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${keyCount}</span><br>
+                    <strong>Uncorrected Errors:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${mistakeCount}</span><br>
+                    <strong>Seconds:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${seconds.toFixed(2)}</span><br>
+                    <strong>Minutes:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${minutes.toFixed(2)}</span><br>
+                    <strong>Gross WPM:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${grossWordsPerMinute.toFixed(2)}</span><br>
+                    <strong>Net Speed:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${netSpeed.toFixed(2)}</span><br>
+                    <strong>Accuracy:</strong> <span style="background-color: rgba(255, 201, 4, 0.500); border-radius: 0.25rem;">${accuracy.toFixed(2)}%</span>
+                `;
+
+                $(`#sentence`)
+                    .addClass(`text-center mt-4`)
+                    .append(scores) // Append scores to #sentence
+                    .hide()
+                    .delay(250)
+                    .fadeIn(250);
+
+                $(`#sentence`)
+                    .append(`<div class="h3" id="question"><strong>Try again?</strong></div>`)
+                    .append(`<button class="col-12 btn btn-lg btn-dark py-4 px-2 my-4 mx-4" id="yesBtn">Yes</button>`)
+                    .append(`<button class="col-12 btn btn-lg btn-dark py-4 px-2 my-4 mx-4" id="noBtn">No</button>`)
+                    .hide()
+                    .delay(750)
+                    .fadeIn(250);
+
+                $(`#yesBtn`).on('click', () => {
+                    location.reload(); // Reloads page .on('click')
+                })
+
+                $(`#noBtn`).on('click', () => {
+                    $(`#noBtn, #yesBtn, #question`)
+                        .hide()
+                        .delay(750)
+                        .fadeOut(250)
+                        .remove(); 
+                })
             } 
+
+
         } 
     })
 
